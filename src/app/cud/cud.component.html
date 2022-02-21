@@ -1,0 +1,61 @@
+<div class="container" *ngIf="!this.loading">
+   <form [formGroup]='aOwnerForm' class="text-center border border-light p-5" (ngSubmit)='add(this.aOwnerForm.value)'>
+      <div class="lastName d-flex">
+         <label class=" col-1 text-lg-start mb-4 pt-2 " for="lastName">Фамилия</label>      
+         <input id="lastName" formControlName='aLastName' type="text" value="lastname" class="form-control mb-4 w-25" [readonly]="this.isView" required/>
+      </div>
+      <div class="firstName d-flex">
+         <label class=" col-1 text-lg-start mb-4 pt-2 " for="firstName">Имя</label>
+         <input id="firstName" formControlName='aFirstName' type="text" class="form-control mb-4 w-25" value="Name" [readonly]="this.isView" required/>
+      </div>
+      <div class="middleName d-flex">
+         <label class=" col-1 text-lg-start mb-4 pt-2 " for="middleName">Отчество</label>
+         <input id="middleName" formControlName='aMiddleName' type="text" class="form-control mb-4 w-25" [readonly]="this.isView" required/>
+      </div>
+      <h1 class="text-lg-start " >Автомобили</h1>
+      <div class="row d-flex mb-1 flex-nowrap" >
+         <div class="col-auto flex-grow-1 text-start">
+            <label for="" class="">Номер</label>
+         </div>
+         <div class="col-auto flex-grow-1 text-start ">
+            <label for="" class="">Марка</label>
+         </div>
+         <div class="col-auto flex-grow-1 text-start ">
+            <label for="" class="">Модель</label>
+         </div>
+         <div class="col-auto flex-grow-1 text-start ">
+            <label for="" class="">Год</label>
+         </div>
+         <div class="col-auto flex-grow-1 text-start "></div>
+      </div>
+      <div formArrayName="aCars" class="carTableRow" *ngFor="let t of aCars.controls; let i = index">
+         <div class="row d-flex mb-4 flex-nowrap carTableRow" [formGroupName]="i">
+            <div class="col-auto flex-lg-shrink-1">
+               <input formControlName='aIdNumber' id="{{'aIdNumber'+i}}" type="text" class="form-control h-100 " [readonly]="this.isView" required/>
+            </div>
+            <div class="col-auto flex-lg-shrink-1">
+               <input formControlName='aManufacturer' id="{{'aManufacturer' + i}}" type="text" class="form-control h-100 " [readonly]="this.isView" required/>
+            </div>
+            <div class="col-auto flex-lg-shrink-1">
+               <input formControlName='aModel' id="{{'aModel'+i}}" type="text" class="form-control h-100 " [readonly]="this.isView" required/>
+            </div>
+            <div class="col-auto flex-lg-shrink-1">
+                  <input formControlName='aYear' id="{{'aYear' + i}}" type="number" class="form-control h-100 " [readonly]="this.isView" required/>
+            </div>
+            <div class="col-auto flex-lg-shrink-1 text-lg-start w-25" *ngIf="this.isView===''">
+               <button type="button" class="btn btn-danger  h-100 w-25 d-inline" (click)="deleteCar(i)"><img src="./assets/img/pngwing.png" alt=""></button>
+            </div>
+         </div>
+      </div>
+      <div class="row" *ngIf="this.isView===''">
+         <div class="d-grid gap-2 mb-2 d-md-0">
+            <button class="btn btn-primary text-nowrap w-25" type="button" (click)='addaCar()'>+ Добавить автомобиль</button>
+         </div>
+      </div>
+      <div class="gap-2 text-lg-start" >
+         <button *ngIf="this.isView===''" class="btn btn-primary me-2  d-inline text-nowrap" type="submit" [disabled]='aOwnerForm.invalid'>Сохранить</button>
+         <button type="button" class="btn btn-secondary d-inline" (click)="goBack()">Назад</button>
+      </div>
+   </form>
+
+</div>

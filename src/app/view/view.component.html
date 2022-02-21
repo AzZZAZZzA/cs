@@ -1,0 +1,29 @@
+<div class="container" >
+   <h1>Владельци автомобилей</h1>
+   <button class="btn btn-primary me-5" (click)="this.ownerById.id=-1" ><a routerLink="/cud/{{0}}/edit" class="text-decoration-none text-reset">+ Добавить</a></button>
+
+   <button class="btn btn-secondary me-1 " [disabled]="buttonDisabled" ><a [routerLink]="linkControlView" class="text-decoration-none text-reset"><img src="./assets/img/pngwing1.png" alt=""> Просмотр</a></button>
+
+   <button class="btn btn-secondary me-1 " [disabled]="buttonDisabled" ><a [routerLink]="linkControlEdit" class="text-decoration-none text-reset"><img src="./assets/img/pngwing2.png" alt=""> Редактировать</a></button>
+
+   <button class="btn btn-secondary" (click)="this.delete()"><img src="./assets/img/pngwing.png" alt=""> Удаление</button>
+
+   <table class="table table-bordered mt-3" *ngIf="loading===false" > 
+      <tr>
+         <td>Фамилия</td>
+         <td>Имя</td>
+         <td>Отчеество</td>
+         <td>Количество автомобилей</td>
+      </tr>
+     <tr class="owner" *ngFor="let owner of this.owners"
+         (click)="this.activateOwner(owner)" [class.active]="owner.id==this.id"
+      >
+      <td>{{owner.aLastName}}</td>
+      <td>{{owner.aFirstName}}</td>
+      <td>{{owner.aMiddleName}}</td>
+      <td>{{owner.aCars.length}}</td>
+      </tr>
+
+   </table>
+
+</div>
