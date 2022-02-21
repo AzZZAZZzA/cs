@@ -49,7 +49,6 @@ export class CudComponent implements OnInit{
             }
           })
       }else{valid= false,cause="Неправильный формат номера"}
-      //console.log(cause);      
       return valid? null : {why: cause }
     }
   }
@@ -71,19 +70,13 @@ export class CudComponent implements OnInit{
 
   add(owner:any){
     if(owner.id ===this.createdOwnerId){
-      //owner.id=99//this.viewComponent.owners.length+1
       this.carOwnersService.createOwner(owner)
       .subscribe(owner => {
-        //this.viewComponent.owners.push(owner);
         this.goBack();
       });
     }else{
       this.carOwnersService.updateOwner(owner)
-      .subscribe(()=>   this.goBack()
-      
-        
-        //this.viewComponent.owners.splice(owner.id-1,1,owner)
-      );
+      .subscribe(()=>this.goBack());
     }
   }
 
